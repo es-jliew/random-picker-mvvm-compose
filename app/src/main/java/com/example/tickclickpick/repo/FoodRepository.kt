@@ -29,6 +29,6 @@ class FoodRepository : IFoodRepository {
 
     override suspend fun createDemoFood() {
         foodBox.put(foodModel1, foodModel2, foodModel3)
-        retrieveAllFood()
+        //retrieveAllFood()
     }
 }

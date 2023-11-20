@@ -27,14 +27,14 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FoodListScreen(
-    viewModel: FoodListViewModel = viewModel()
+    viewModel: FoodListViewModel = koinViewModel()
 ) {
     var foodModelList = viewModel.foodModelList
 
     LaunchedEffect(Unit) {
         //viewModel.addRecipe()
-        viewModel.createDemoFood()
-        //viewModel.retrieveAllFood()
+        //viewModel.createDemoFood()
+        viewModel.retrieveAllFood()
     }
 
     Scaffold(
@@ -44,9 +44,9 @@ fun FoodListScreen(
                     items(foodModelList) { foodModel -> FoodListItem(foodModel = foodModel) {
                         foodModelList = foodModelList.toMutableList().also { itemList -> itemList.remove(foodModel) }
                     } }
-                } /*else {
+                } else {
                     item{ ShowNoFood() }
-                }*/
+                }
             }
         }}
     )

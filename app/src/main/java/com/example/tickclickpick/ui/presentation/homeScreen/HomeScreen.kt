@@ -39,13 +39,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.tickclickpick.ui.AppScreen
 import com.example.tickclickpick.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(onTabClicked: () -> Unit) {
+fun HomeScreen(
+    onTabClicked: () -> Unit,
+    viewModel: HomeViewModel = koinViewModel()
+) {
     //val viewModel: HomeViewModel = viewModel()
     var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
     //Prevent onBackPressed to splash screen
@@ -151,6 +152,7 @@ enum class BottomNavItem(val icon: ImageVector, val title: String) {
     Home(Icons.Default.Home, "Home"),
     Search(Icons.Default.List, "List")
 }
+
 
 @Preview
 @Composable
