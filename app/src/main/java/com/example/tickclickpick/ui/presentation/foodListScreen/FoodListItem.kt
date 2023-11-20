@@ -5,13 +5,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +31,8 @@ fun FoodListItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
     ) {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .padding(24.dp, 6.dp)
+            .padding(24.dp, 6.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(
                 checked = foodModel.isChecked,
@@ -41,16 +43,18 @@ fun FoodListItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
             Text(
                 text = foodModel.name.toString(),
                 fontSize = 24.sp,
+                modifier = Modifier.weight(1f)
                 //fontFamily = FontFamily(Font(R.font.playfair_display_regular)),
             )
 
             IconButton(
-                onClick = onRemoveClick
+                onClick = onRemoveClick,
+                //Modifier.weight()
             ) {
                 Icon(
-                    imageVector = Icons.Default.Close,
+                    imageVector = Icons.Default.Delete,
                     contentDescription = "Remove",
-                    tint = Color.Red
+                    //tint = Color.Red
                 )
             }
             /*Text(
@@ -66,7 +70,7 @@ fun FoodListItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
 @Composable
 fun PreviewFoodListItem() {
     AppTheme {
-        FoodListItem(foodModel = FoodModel(id = 0, name = "Preview text")) {
+        FoodListItem(foodModel = FoodModel(id = 0, name = "Preview Text")) {
 
         }
     }

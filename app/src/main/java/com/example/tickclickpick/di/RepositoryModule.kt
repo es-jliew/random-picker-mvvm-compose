@@ -6,5 +6,6 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { FoodRepository() } bind IFoodRepository::class
+    //single { FoodRepository() } bind IFoodRepository::class
+    single<IFoodRepository> { FoodRepository() }
 }

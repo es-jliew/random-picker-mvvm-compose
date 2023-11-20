@@ -19,19 +19,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tickclickpick.R
 import com.example.tickclickpick.ui.theme.AppTheme
+import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
-
 @Composable
-fun FoodListScreen() {
-    val viewModel: FoodListViewModel = koinViewModel()
+fun FoodListScreen(
+    viewModel: FoodListViewModel = viewModel()
+) {
     var foodModelList = viewModel.foodModelList
 
     LaunchedEffect(Unit) {
         //viewModel.addRecipe()
-        viewModel.getAllFood()
+        viewModel.createDemoFood()
+        //viewModel.retrieveAllFood()
     }
 
     Scaffold(
@@ -41,9 +44,9 @@ fun FoodListScreen() {
                     items(foodModelList) { foodModel -> FoodListItem(foodModel = foodModel) {
                         foodModelList = foodModelList.toMutableList().also { itemList -> itemList.remove(foodModel) }
                     } }
-                } else {
+                } /*else {
                     item{ ShowNoFood() }
-                }
+                }*/
             }
         }}
     )
@@ -72,7 +75,7 @@ fun ShowNoFood() {
         )
         Text(text = "Your recipes will show here",
             modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
+            //textAlign = TextAlign.Center
         )
     }
 }

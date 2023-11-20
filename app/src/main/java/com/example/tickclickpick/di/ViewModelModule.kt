@@ -9,5 +9,5 @@ import org.koin.dsl.bind
 
 val viewModelModule = module {
     viewModel { HomeViewModel() }
-    viewModel { FoodListViewModel(get()) } bind IFoodListViewModel::class
+    viewModel { FoodListViewModel(foodRepository = get()) }
 }

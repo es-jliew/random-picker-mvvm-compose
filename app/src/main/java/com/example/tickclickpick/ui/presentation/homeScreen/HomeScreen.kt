@@ -14,13 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -43,10 +39,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.tickclickpick.ui.AppScreen
 import com.example.tickclickpick.ui.theme.AppTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onTabClicked: () -> Unit) {
+    //val viewModel: HomeViewModel = viewModel()
     var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
     //Prevent onBackPressed to splash screen
     BackHandler { }
@@ -63,7 +63,7 @@ fun HomeScreen() {
                         //tint = Color.White,
                         contentDescription = "Localized description")
                 }
-                    IconButton(onClick = { /* doSomething() */ }) {
+                    IconButton(onClick = { onTabClicked() }) {
                         Icon(
                             Icons.Filled.List,
                             //tint = Color.White,
@@ -156,6 +156,6 @@ enum class BottomNavItem(val icon: ImageVector, val title: String) {
 @Composable
 fun PreviewHomeScreen() {
     AppTheme {
-        HomeScreen()
+        HomeScreen (onTabClicked = {})
     }
 }
