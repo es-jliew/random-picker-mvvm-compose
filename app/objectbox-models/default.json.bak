@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:6997327876944518862",
-      "lastPropertyId": "7:6705441604895735443",
+      "lastPropertyId": "8:7592083632976563157",
       "name": "FoodModel",
       "properties": [
         {
@@ -18,6 +18,11 @@
           "id": "3:6155486746789634185",
           "name": "name",
           "type": 9
+        },
+        {
+          "id": "8:7592083632976563157",
+          "name": "isChecked",
+          "type": 1
         }
       ],
       "relations": []

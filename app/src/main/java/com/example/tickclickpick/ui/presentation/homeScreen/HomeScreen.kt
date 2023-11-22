@@ -204,6 +204,7 @@ enum class BottomNavItem(val icon: ImageVector, val title: String) {
     Search(Icons.Default.List, "List")
 }
 
+
 @Preview
 @Composable
 fun PreviewHomeScreen() {

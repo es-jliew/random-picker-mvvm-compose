@@ -3,9 +3,11 @@ package com.example.tickclickpick.ui.presentation.foodListScreen
 import com.example.tickclickpick.model.FoodModel
 
 interface IFoodListViewModel {
-    fun getAllFood()
+    fun retrieveAllFood()
 
-    fun addFood(foodModel: FoodModel)
+    fun createFood (foodModel: FoodModel)
 
-    fun removeFood(foodModel: FoodModel)
+    fun deleteFood(foodModel: FoodModel)
+
+    fun createDemoFood()
 }

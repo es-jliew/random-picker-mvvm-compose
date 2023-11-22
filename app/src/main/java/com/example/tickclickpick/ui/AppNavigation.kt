@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tickclickpick.ui.presentation.foodListScreen.FoodListScreen
+import com.example.tickclickpick.ui.presentation.foodListScreen.FoodListViewModel
 import com.example.tickclickpick.ui.presentation.homeScreen.HomeScreen
 import com.example.tickclickpick.ui.presentation.splashScreen.SplashScreen
 
@@ -23,7 +24,9 @@ fun AppNavigation(
             )
         }
         composable(route = AppScreen.HomeScreen.screenName) {
-            HomeScreen()
+            HomeScreen(
+                onTabClicked = { navController.navigate(AppScreen.FoodListScreen.screenName) }
+            )
         }
         composable(route = AppScreen.FoodListScreen.screenName) {
             FoodListScreen()

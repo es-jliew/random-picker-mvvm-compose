@@ -1,4 +1,4 @@
-package com.example.tickclickpick.activity
+package com.example.tickclickpick
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
