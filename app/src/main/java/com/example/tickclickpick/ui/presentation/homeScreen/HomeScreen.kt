@@ -8,19 +8,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material3.AlertDialogDefaults.containerColor
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -28,8 +28,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,11 +44,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.tickclickpick.R
 import com.example.tickclickpick.ui.theme.AppTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
     var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
@@ -52,6 +63,19 @@ fun HomeScreen() {
     BackHandler { }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    //containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    containerColor = Color.Black,
+                    //titleContentColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = Color.White
+                ),
+                title = {
+                    Text(stringResource(R.string.title_pick_a_meal))
+                }
+            )
+        },
         bottomBar = {
             BottomAppBar(
                 //containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -81,14 +105,42 @@ fun HomeScreen() {
                 }
                 )
         },
-        floatingActionButtonPosition = FabPosition.Center,
-        content = { padding -> Surface(modifier = Modifier.padding(padding)) {
-            Box {
-                DashBoard()
+        floatingActionButtonPosition = FabPosition.Center
+    ) { padding ->
+        Surface(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            //color = MaterialTheme.colorScheme.primaryContainer
+            color = Color.Black
+        ) {
+            Column() {
+                Box(
+                    Modifier.fillMaxWidth()
+                ) {
+                    //DashBoard(
+                    SearchBar(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter),
+                        query = "String",
+                        onQueryChange = {},
+                        onSearch = {},
+                        active = false,
+                        onActiveChange = {},
+                        shape = SearchBarDefaults.inputFieldShape,
+                        placeholder = { Text("Hinted search text") },
+                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                        trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
+                    ) {}
+                }
+                Text(
+                    modifier = Modifier.padding(16.dp),
+                    text = stringResource(id = R.string.title_your_meal_list),
+                    color = Color.White, style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Medium)
             }
         }
-        }
-    )
+    }
 }
 
 @Composable
