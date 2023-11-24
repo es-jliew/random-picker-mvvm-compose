@@ -25,7 +25,7 @@ fun AppNavigation(
         }
         composable(route = AppScreen.HomeScreen.screenName) {
             HomeScreen(
-                onTabClicked = { navController.navigate(AppScreen.FoodListScreen.screenName) }
+                //onTabClicked = { navController.navigate(AppScreen.FoodListScreen.screenName) }
             )
         }
         composable(route = AppScreen.FoodListScreen.screenName) {

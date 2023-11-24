@@ -45,9 +45,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.isTraversalGroup
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -66,8 +63,8 @@ fun HomeScreen() {
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    //containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    containerColor = Color.Black,
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    //containerColor = Color.Black,
                     //titleContentColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = Color.White
                 ),
@@ -111,8 +108,8 @@ fun HomeScreen() {
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            //color = MaterialTheme.colorScheme.primaryContainer
-            color = Color.Black
+            color = MaterialTheme.colorScheme.primary
+            //color = Color.Black
         ) {
             Column() {
                 Box(
@@ -137,7 +134,8 @@ fun HomeScreen() {
                     modifier = Modifier.padding(16.dp),
                     text = stringResource(id = R.string.title_your_meal_list),
                     color = Color.White, style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Medium)
+                    fontWeight = FontWeight.Medium,
+                )
             }
         }
     }
