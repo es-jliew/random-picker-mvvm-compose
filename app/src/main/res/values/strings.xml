@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TickClickPick</string>
+    <string name="app_name">Tick Click Pick</string>
     <string name="title_pick_a_meal">Hi, Let\'s Pick A Meal</string>
     <string name="title_your_meal_list">Meal List</string>
 </resources>
