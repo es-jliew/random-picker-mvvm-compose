@@ -83,6 +83,7 @@ fun HomeScreen() {
                     }
                 }
             )
+            TopAppBar()
         },
         bottomBar = {
             BottomAppBar(
