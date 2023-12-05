@@ -60,26 +60,6 @@ fun HomeScreen() {
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    //containerColor = Color.Black,
-                    //titleContentColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = Color.White
-                ),
-                title = {
-                    Text(stringResource(R.string.app_name))
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        Icon(
-                            Icons.Filled.Home,
-                            //tint = Color.White,
-                            contentDescription = "Localized description",
-                            tint = Color.White)
-                    }
-                }
-            )
             TopAppBar()
         },
         bottomBar = {
