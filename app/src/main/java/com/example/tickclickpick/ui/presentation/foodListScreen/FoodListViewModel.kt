@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tickclickpick.model.FoodModel
-import com.example.tickclickpick.repo.FoodRepository
 import com.example.tickclickpick.repo.IFoodRepository
 import kotlinx.coroutines.launch
 
