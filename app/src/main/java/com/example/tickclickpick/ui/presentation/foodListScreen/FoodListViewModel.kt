@@ -10,10 +10,10 @@ import com.example.tickclickpick.repo.FoodRepository
 import com.example.tickclickpick.repo.IFoodRepository
 import kotlinx.coroutines.launch
 
-class FoodListViewModel(private val foodRepository: IFoodRepository): ViewModel(){
+class FoodListViewModel(private val foodRepository: IFoodRepository): ViewModel(), IFoodListViewModel{
     var foodModelList by mutableStateOf(emptyList<FoodModel>())
 
-    fun retrieveAllFood() {
+    override fun retrieveAllFood() {
         viewModelScope.launch {
             foodRepository.retrieveAllFood().collect { response ->
                foodModelList = response
@@ -21,19 +21,19 @@ class FoodListViewModel(private val foodRepository: IFoodRepository): ViewModel(
         }
     }
 
-    fun createFood(foodModel: FoodModel) {
+    override fun createFood(foodModel: FoodModel) {
         viewModelScope.launch {
             foodRepository.createFood(foodModel)
         }
     }
 
-    fun deleteFood(foodModel: FoodModel) {
+    override fun deleteFood(foodModel: FoodModel) {
         viewModelScope.launch {
             foodRepository.deleteFood(foodModel)
         }
     }
 
-    fun createDemoFood() {
+    override fun createDemoFood() {
         viewModelScope.launch {
             foodRepository.createDemoFood()
         }

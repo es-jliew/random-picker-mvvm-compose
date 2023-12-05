@@ -1,7 +1,9 @@
 package com.example.tickclickpick.ui.presentation.homeScreen
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Fastfood
+import androidx.compose.material.icons.rounded.AccountCircle
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -16,21 +18,22 @@ import com.example.tickclickpick.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar() {
+fun HomeTopAppBar() {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            //containerColor = Color.Black,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-            //titleContentColor = Color.White
+            containerColor = MaterialTheme.colorScheme.primary,
+            //titleContentColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = Color.White
         ),
+
         title = {
-            Text(stringResource(R.string.title_pick_a_meal))
+            Text(stringResource(R.string.home))
         },
-        navigationIcon = {
+
+        actions = {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
-                    Icons.Filled.Fastfood,
+                    Icons.Rounded.AccountCircle,
                     contentDescription = "",
                     tint = Color.White
                 )

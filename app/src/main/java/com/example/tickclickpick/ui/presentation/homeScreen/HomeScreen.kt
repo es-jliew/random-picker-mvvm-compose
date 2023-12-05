@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
@@ -20,7 +22,9 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -42,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,8 +65,9 @@ fun HomeScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar()
+            HomeTopAppBar()
         },
+
         bottomBar = {
             BottomAppBar(
                 //containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -113,7 +119,8 @@ fun HomeScreen() {
                         onSearch = {},
                         active = false,
                         onActiveChange = {},
-                        shape = SearchBarDefaults.inputFieldShape,
+                        //shape = SearchBarDefaults.inputFieldShape,
+                        shape = RoundedCornerShape(12.dp),
                         placeholder = { Text("Hinted search text") },
                         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                         trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
@@ -125,6 +132,17 @@ fun HomeScreen() {
                     color = Color.White, style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Medium,
                 )
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    ),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth()
+                        .height(48.dp)
+                ) {
+
+                }
             }
         }
     }

@@ -16,13 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tickclickpick.R
+import com.example.tickclickpick.ui.presentation.homeScreen.FoodItem
 import com.example.tickclickpick.ui.theme.AppTheme
-import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -41,7 +39,7 @@ fun FoodListScreen(
         content = { padding -> Surface(modifier = Modifier.padding(padding)) {
             LazyColumn(modifier = Modifier) {
                 if (foodModelList.isNotEmpty()) {
-                    items(foodModelList) { foodModel -> FoodListItem(foodModel = foodModel) {
+                    items(foodModelList) { foodModel -> FoodItem(foodModel = foodModel) {
                         foodModelList = foodModelList.toMutableList().also { itemList -> itemList.remove(foodModel) }
                     } }
                 } else {

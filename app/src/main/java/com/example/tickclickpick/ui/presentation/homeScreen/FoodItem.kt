@@ -1,4 +1,4 @@
-package com.example.tickclickpick.ui.presentation.foodListScreen
+package com.example.tickclickpick.ui.presentation.homeScreen
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,7 +21,7 @@ import com.example.tickclickpick.model.FoodModel
 import com.example.tickclickpick.ui.theme.AppTheme
 
 @Composable
-fun FoodListItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
+fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
     Card(
         modifier = Modifier
             .wrapContentHeight()
@@ -70,7 +69,7 @@ fun FoodListItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
 @Composable
 fun PreviewFoodListItem() {
     AppTheme {
-        FoodListItem(foodModel = FoodModel(id = 0, name = "Preview Text")) {
+        FoodItem(foodModel = FoodModel(id = 0, name = "Preview Text")) {
 
         }
     }

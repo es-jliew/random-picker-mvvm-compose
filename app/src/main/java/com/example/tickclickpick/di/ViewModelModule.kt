@@ -8,6 +8,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 
 val viewModelModule = module {
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get()) }
     viewModel { FoodListViewModel(foodRepository = get()) }
 }

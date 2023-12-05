@@ -12,7 +12,5 @@ interface IFoodRepository {
 
     suspend fun updateFood(foodModel: FoodModel)
 
-    suspend fun createDemoFood(){
-
-    }
+    suspend fun createDemoFood()
 }
