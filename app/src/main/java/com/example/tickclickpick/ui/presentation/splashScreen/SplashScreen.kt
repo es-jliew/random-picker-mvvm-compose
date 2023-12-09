@@ -1,53 +1,53 @@
 package com.example.tickclickpick.ui.presentation.splashScreen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.tickclickpick.R
-import com.example.tickclickpick.constants.GeneralConstants
+import com.example.tickclickpick.constants.ColorConstants
+import com.example.tickclickpick.ui.common.GradientButton
 import com.example.tickclickpick.ui.theme.AppTheme
-import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(onFinishLoading: () -> Unit) {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animation))
-    val progress by animateLottieCompositionAsState(composition = composition)
+fun SplashScreen(onButtonClick: () -> Unit) {
+    //val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animation))
+    //val progress by animateLottieCompositionAsState(composition = composition)
     // Add a delay using LaunchedEffect and Coroutine
     LaunchedEffect(Unit) {
-        delay(GeneralConstants.SPLASH_SCREEN_DURATION)
-        onFinishLoading()
+        //delay(GeneralConstants.SPLASH_SCREEN_DURATION)
+        //onFinishLoading()
     }
 
     Surface (
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.inversePrimary
+        color = Color(ColorConstants.BACKGROUND)
     ) {
-        Box (
-            contentAlignment = Alignment.Center
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(horizontalAlignment = Alignment.Start) {
-                Text(text = "Tick. Click. Pick")
-                Spacer(modifier = Modifier.height(16.dp))
-                LottieAnimation(composition = composition, progress = { progress })
-            }
+            Spacer(modifier = Modifier.padding(top = 56.dp))
+
+            SplashImage()
+
+            TitleText()
+
+            Spacer(modifier = Modifier.padding(top = 20.dp))
+
+            SubtitleText()
+
+            Spacer(modifier = Modifier.padding(top = 42.dp))
+
+            GradientButton(onButtonClick, stringResource(id = R.string.btn_next), Modifier)
         }
     }
 }
@@ -56,5 +56,5 @@ fun SplashScreen(onFinishLoading: () -> Unit) {
 @Composable
 fun PreviewSplashScreen()
 {
-    AppTheme { SplashScreen(onFinishLoading = { }) }
+    AppTheme { SplashScreen(onButtonClick = { }) }
 }

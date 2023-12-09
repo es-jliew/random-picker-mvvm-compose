@@ -7,35 +7,25 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,96 +40,80 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.tickclickpick.R
+import com.example.tickclickpick.constants.ColorConstants
+import com.example.tickclickpick.model.FoodModel
+import com.example.tickclickpick.repo.IFoodRepository
+import com.example.tickclickpick.ui.common.GradientButton
+import com.example.tickclickpick.ui.presentation.foodListScreen.FoodListViewModel
+import com.example.tickclickpick.ui.presentation.foodListScreen.ShowNoFood
 import com.example.tickclickpick.ui.theme.AppTheme
+import kotlinx.coroutines.flow.Flow
+import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: FoodListViewModel = koinViewModel()) {
+    var foodModelList = viewModel.foodModelList
     var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
     //Prevent onBackPressed to splash screen
     BackHandler { }
 
-    Scaffold(
-        topBar = {
-            HomeTopAppBar()
-        },
+    LaunchedEffect(Unit) {
+        //viewModel.createDemoFood()
+        viewModel.retrieveAllFood()
+    }
 
-        bottomBar = {
-            BottomAppBar(
-                //containerColor = MaterialTheme.colorScheme.primaryContainer,
-                modifier = Modifier,
-                actions = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                    Icon(
-                        Icons.Filled.Home,
-                        //tint = Color.White,
-                        contentDescription = "Localized description")
-                }
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        Icon(
-                            Icons.Filled.List,
-                            //tint = Color.White,
-                            contentDescription = "Localized description",
-                        )
-                    }},
-                floatingActionButton = {
-                    FloatingActionButton(
-                        onClick = { /* do something */ },
-                        //containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
-                        elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
-                    ) {
-                        Icon(Icons.Filled.Add, "Localized description")
-                    }
-                }
-                )
-        },
-        floatingActionButtonPosition = FabPosition.Center
-    ) { padding ->
+    Scaffold { padding ->
         Surface(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize(),
-            color = MaterialTheme.colorScheme.primary
-            //color = Color.Black
+            color = Color(ColorConstants.BACKGROUND)
         ) {
-            Column() {
-                Box(
-                    Modifier.fillMaxWidth()
-                ) {
-                    //DashBoard(
-                    SearchBar(
-                        modifier = Modifier
-                            .align(Alignment.TopCenter),
-                        query = "String",
-                        onQueryChange = {},
-                        onSearch = {},
-                        active = false,
-                        onActiveChange = {},
-                        //shape = SearchBarDefaults.inputFieldShape,
-                        shape = RoundedCornerShape(12.dp),
-                        placeholder = { Text("Hinted search text") },
-                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-                        trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
-                    ) {}
-                }
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = stringResource(id = R.string.title_your_meal_list),
-                    color = Color.White, style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Medium,
-                )
-                Card(
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    ),
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                        .height(48.dp)
-                ) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column {
+                    Spacer(modifier = Modifier.padding(top = 60.dp))
 
+                    TitleBar()
+
+                    Spacer(modifier = Modifier.padding(top = 18.dp))
+
+                    HomeSearchBar()
+
+                    Spacer(modifier = Modifier.padding(top = 20.dp))
+
+                    Text(
+                        modifier = Modifier.padding(start = 24.dp),
+                        text = stringResource(id = R.string.title_your_meal_list),
+                        color = Color.White,
+                        fontWeight = FontWeight.W600,
+                        lineHeight = 20.sp,
+                        fontSize = 16.sp,
+                    )
+
+                    Spacer(modifier = Modifier.padding(top = 20.dp))
+
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(20.dp),
+                        modifier = Modifier) {
+                        if (foodModelList.isNotEmpty()) {
+                            items(foodModelList) { foodModel -> FoodItem(foodModel = foodModel) {
+                                foodModelList = foodModelList.toMutableList().also { itemList -> itemList.remove(foodModel) }
+                            } }
+                        } else {
+                            item{ ShowNoFood() }
+                        }
+                    }
                 }
+
+                GradientButton(
+                    {},
+                    stringResource(id = R.string.btn_pick),
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(start = 24.dp, end = 24.dp, bottom = 32.dp))
             }
         }
     }
@@ -211,6 +185,33 @@ enum class BottomNavItem(val icon: ImageVector, val title: String) {
 @Composable
 fun PreviewHomeScreen() {
     AppTheme {
-        HomeScreen()
+        val mockFoodRepository = FoodRepositoryMock()
+        val mockViewModel = FoodListViewModelMock(foodRepository = mockFoodRepository)
+        HomeScreen(viewModel = mockViewModel)
     }
+}
+ class FoodRepositoryMock : IFoodRepository {
+     // Implement mock behavior as needed for preview
+     override suspend fun retrieveAllFood(): Flow<List<FoodModel>> {
+         TODO("Not yet implemented")
+     }
+
+     override suspend fun createFood(foodModel: FoodModel) {
+         TODO("Not yet implemented")
+     }
+
+     override suspend fun deleteFood(foodModel: FoodModel) {
+         TODO("Not yet implemented")
+     }
+
+     override suspend fun updateFood(foodModel: FoodModel) {
+         TODO("Not yet implemented")
+     }
+
+     override suspend fun createDemoFood() {
+         TODO("Not yet implemented")
+     }
+ }
+class FoodListViewModelMock(foodRepository: IFoodRepository) : FoodListViewModel(foodRepository) {
+    // Implement mock behavior as needed for preview
 }

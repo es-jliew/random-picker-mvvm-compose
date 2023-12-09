@@ -15,10 +15,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tickclickpick.R
+import com.example.tickclickpick.model.FoodModel
 import com.example.tickclickpick.ui.presentation.homeScreen.FoodItem
 import com.example.tickclickpick.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
@@ -52,26 +54,31 @@ fun FoodListScreen(
 
 @Preview
 @Composable
-fun PreviewFoodListScreen() {
+fun PreviewFoodListScreen(list: List<FoodModel> = listOf()
+) {
     AppTheme {
         FoodListScreen()
     }
 }
 
+@Preview
 @Composable
 fun ShowNoFood() {
-    Column(modifier = Modifier
+    Column(
+        modifier = Modifier
         .fillMaxSize()
-        .padding(0.dp, 120.dp, 0.dp, 0.dp)) {
+        .padding(0.dp, 0.dp, 0.dp, 0.dp)) {
         Image(
-            painter = painterResource(id = R.drawable.ic_app_launcher),
+            painter = painterResource(id = R.drawable.img_home),
             contentDescription = "empty",
             modifier = Modifier
                 .alpha(0.5f)
                 .fillMaxWidth(),
             alignment = Alignment.Center
         )
-        Text(text = "Your recipes will show here",
+        Text(
+            color = Color.White,
+            text = "Your recipes will show here",
             modifier = Modifier.fillMaxWidth(),
             //textAlign = TextAlign.Center
         )

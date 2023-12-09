@@ -20,7 +20,7 @@ fun AppNavigation(
     ) {
         composable(route = AppScreen.SplashScreen.screenName) {
             SplashScreen(
-                onFinishLoading = { navController.navigate(AppScreen.HomeScreen.screenName) }
+                onButtonClick = { navController.navigate(AppScreen.HomeScreen.screenName) }
             )
         }
         composable(route = AppScreen.HomeScreen.screenName) {

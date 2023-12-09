@@ -7,9 +7,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 
 class FoodRepository : IFoodRepository {
-    private val foodModel1 = FoodModel(name = "Test1", isChecked = true)
-    private val foodModel2 = FoodModel(name = "Test2", isChecked = true)
-    private val foodModel3 = FoodModel(name = "Test3", isChecked = true)
+    private val foodModel1 = FoodModel(name = "Nasi Lemak", isChecked = true)
+    private val foodModel2 = FoodModel(name = "Maggi Goreng", isChecked = false)
+    private val foodModel3 = FoodModel(name = "Chicken Rice", isChecked = true)
 
     private val foodBox = ObjectBox.boxStore.boxFor(FoodModel::class.java)
     @OptIn(ExperimentalCoroutinesApi::class)

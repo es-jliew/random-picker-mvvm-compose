@@ -80,7 +80,7 @@ fun AppTheme(
   val colors = if (!useDarkTheme) {
     lightColors
   } else {
-    darkColors
+    lightColors
   }
 
   MaterialTheme(

@@ -9,7 +9,7 @@ import com.example.tickclickpick.model.FoodModel
 import com.example.tickclickpick.repo.IFoodRepository
 import kotlinx.coroutines.launch
 
-class FoodListViewModel(private val foodRepository: IFoodRepository): ViewModel(), IFoodListViewModel{
+open class FoodListViewModel(private val foodRepository: IFoodRepository): ViewModel(), IFoodListViewModel{
     var foodModelList by mutableStateOf(emptyList<FoodModel>())
 
     override fun retrieveAllFood() {

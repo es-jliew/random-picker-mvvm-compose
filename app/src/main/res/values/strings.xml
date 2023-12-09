@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Tick Click Pick</string>
     <string name="home">Home</string>
-    <string name="title_your_meal_list">Meal List</string>
+    <string name="title_your_meal_list">Food List</string>
+    <string name="title_pick_food">Pick Your \nFavourite Food</string>
+    <string name="title_cannot_decide_meal">Cannot Decide Your \nMeal Today ?</string>
+    <string name="desc_help_decide_meal">This randomizer can help you to decide \nyour meal from your food list !</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_pick">Pick A Food For Me</string>
 </resources>
