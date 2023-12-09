@@ -16,3 +16,4 @@ local.properties
 /.idea/.name
 /.idea/deploymentTargetDropDown.xml
 /.idea/vcs.xml
+/.idea/migrations.xml
