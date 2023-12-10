@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -26,10 +24,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,19 +37,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tickclickpick.R
 import com.example.tickclickpick.constants.ColorConstants
-import com.example.tickclickpick.model.FoodModel
-import com.example.tickclickpick.repo.IFoodRepository
+import com.example.tickclickpick.repo.FoodRepositoryMock
+import com.example.tickclickpick.ui.common.FoodItemList
 import com.example.tickclickpick.ui.common.GradientButton
-import com.example.tickclickpick.ui.presentation.foodListScreen.FoodListViewModel
-import com.example.tickclickpick.ui.presentation.foodListScreen.ShowNoFood
+import com.example.tickclickpick.ui.common.TitleBar
 import com.example.tickclickpick.ui.theme.AppTheme
-import kotlinx.coroutines.flow.Flow
+import com.example.tickclickpick.viewmodel.HomeViewModel
+import com.example.tickclickpick.viewmodel.HomeViewModelMock
+import com.example.tickclickpick.viewmodel.IHomeViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(viewModel: FoodListViewModel = koinViewModel()) {
-    var foodModelList = viewModel.foodModelList
-    var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
+fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
+    //var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
     //Prevent onBackPressed to splash screen
     BackHandler { }
 
@@ -94,17 +88,7 @@ fun HomeScreen(viewModel: FoodListViewModel = koinViewModel()) {
 
                     Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                    LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(20.dp),
-                        modifier = Modifier) {
-                        if (foodModelList.isNotEmpty()) {
-                            items(foodModelList) { foodModel -> FoodItem(foodModel = foodModel) {
-                                foodModelList = foodModelList.toMutableList().also { itemList -> itemList.remove(foodModel) }
-                            } }
-                        } else {
-                            item{ ShowNoFood() }
-                        }
-                    }
+                    FoodItemList(viewModel = viewModel)
                 }
 
                 GradientButton(
@@ -124,7 +108,7 @@ fun BottomNavItems(
     onItemSelected: (BottomNavItem) -> Unit,
     selectedTab: BottomNavItem
 ) {
-    val navItems = BottomNavItem.values()
+    val navItems = BottomNavItem.entries.toTypedArray()
 
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -186,32 +170,7 @@ enum class BottomNavItem(val icon: ImageVector, val title: String) {
 fun PreviewHomeScreen() {
     AppTheme {
         val mockFoodRepository = FoodRepositoryMock()
-        val mockViewModel = FoodListViewModelMock(foodRepository = mockFoodRepository)
-        HomeScreen(viewModel = mockViewModel)
+        val homeViewModelMock = HomeViewModelMock(mockFoodRepository)
+        HomeScreen(homeViewModelMock)
     }
-}
- class FoodRepositoryMock : IFoodRepository {
-     // Implement mock behavior as needed for preview
-     override suspend fun retrieveAllFood(): Flow<List<FoodModel>> {
-         TODO("Not yet implemented")
-     }
-
-     override suspend fun createFood(foodModel: FoodModel) {
-         TODO("Not yet implemented")
-     }
-
-     override suspend fun deleteFood(foodModel: FoodModel) {
-         TODO("Not yet implemented")
-     }
-
-     override suspend fun updateFood(foodModel: FoodModel) {
-         TODO("Not yet implemented")
-     }
-
-     override suspend fun createDemoFood() {
-         TODO("Not yet implemented")
-     }
- }
-class FoodListViewModelMock(foodRepository: IFoodRepository) : FoodListViewModel(foodRepository) {
-    // Implement mock behavior as needed for preview
 }

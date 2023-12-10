@@ -1,4 +1,4 @@
-package com.example.tickclickpick.ui.presentation.splashScreen
+package com.example.tickclickpick.ui.common
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.sp
 import com.example.tickclickpick.R
 
 @Composable
-fun TitleText() {
+fun SubtitleText() {
     Text(
-        stringResource(id = R.string.title_cannot_decide_meal),
+        stringResource(id = R.string.desc_help_decide_meal),
         color = Color.White,
-        fontSize = 22.sp,
+        fontSize = 12.sp,
         textAlign = TextAlign.Center,
-        lineHeight = 28.sp)
+        lineHeight = 21.sp)
 }

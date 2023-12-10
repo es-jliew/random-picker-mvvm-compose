@@ -1,4 +1,4 @@
-package com.example.tickclickpick.ui.presentation.homeScreen
+package com.example.tickclickpick.ui.common
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

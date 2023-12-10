@@ -5,6 +5,8 @@ import com.example.tickclickpick.model.FoodModel
 import io.objectbox.kotlin.toFlow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import okhttp3.internal.notifyAll
+import okhttp3.internal.wait
 
 class FoodRepository : IFoodRepository {
     private val foodModel1 = FoodModel(name = "Nasi Lemak", isChecked = true)
@@ -19,8 +21,8 @@ class FoodRepository : IFoodRepository {
         foodBox.put(foodModel)
     }
 
-    override suspend fun deleteFood(foodModel: FoodModel) {
-        foodBox.remove(foodModel.id)
+    override suspend fun deleteFood(foodModel: FoodModel): Boolean {
+       return foodBox.remove(foodModel.id)
     }
 
     override suspend fun updateFood(foodModel: FoodModel) {

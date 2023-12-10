@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.example.tickclickpick.R
 import com.example.tickclickpick.constants.ColorConstants
 import com.example.tickclickpick.ui.common.GradientButton
+import com.example.tickclickpick.ui.common.SubtitleText
+import com.example.tickclickpick.ui.common.TitleText
 import com.example.tickclickpick.ui.theme.AppTheme
 
 @Composable

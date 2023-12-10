@@ -8,7 +8,7 @@ interface IFoodRepository {
 
     suspend fun createFood(foodModel: FoodModel)
 
-    suspend fun deleteFood(foodModel: FoodModel)
+    suspend fun deleteFood(foodModel: FoodModel): Boolean
 
     suspend fun updateFood(foodModel: FoodModel)
 

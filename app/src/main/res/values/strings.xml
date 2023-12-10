@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Tick Click Pick</string>
-    <string name="home">Home</string>
     <string name="title_your_meal_list">Food List</string>
     <string name="title_pick_food">Pick Your \nFavourite Food</string>
     <string name="title_cannot_decide_meal">Cannot Decide Your \nMeal Today ?</string>

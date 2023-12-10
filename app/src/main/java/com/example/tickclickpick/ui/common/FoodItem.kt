@@ -1,5 +1,6 @@
-package com.example.tickclickpick.ui.presentation.homeScreen
+package com.example.tickclickpick.ui.common
 
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,7 +31,10 @@ import com.example.tickclickpick.model.FoodModel
 import com.example.tickclickpick.ui.theme.AppTheme
 
 @Composable
-fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
+fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit,  onCheckboxClicked: (FoodModel) -> Unit) {
+    // Create MutableState for isChecked
+    var isChecked by remember { mutableStateOf(foodModel.isChecked) }
+
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color.White.copy(alpha = 0.1f)
@@ -48,8 +56,11 @@ fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
                     uncheckedColor = Color(ColorConstants.Button.GRADIENT_START),
                     checkmarkColor = Color.Black.copy(alpha = 0.4f)
                 ),
-                checked = foodModel.isChecked,
-                onCheckedChange = { foodModel.isChecked = it },
+                checked = isChecked,
+                onCheckedChange = { checkState ->
+                    Log.d("Test", checkState.toString())
+                    onCheckboxClicked(foodModel.copy(isChecked = checkState))
+                    isChecked = checkState},
                 modifier = Modifier.padding(end = 8.dp)
             )
 
@@ -84,7 +95,7 @@ fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit) {
 @Composable
 fun PreviewFoodListItem() {
     AppTheme {
-        FoodItem(foodModel = FoodModel(id = 0, name = "Preview Text")) {
+        FoodItem(foodModel = FoodModel(id = 0, name = "Preview Text"), {}) {
 
         }
     }

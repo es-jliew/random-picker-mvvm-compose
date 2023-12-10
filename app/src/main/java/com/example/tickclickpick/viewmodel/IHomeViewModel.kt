@@ -1,4 +1,4 @@
-package com.example.tickclickpick.ui.presentation.homeScreen
+package com.example.tickclickpick.viewmodel
 
 import com.example.tickclickpick.model.FoodModel
 
@@ -9,5 +9,9 @@ interface IHomeViewModel {
 
     fun deleteFood(foodModel: FoodModel)
 
+    fun getFoodList(): List<FoodModel>
+
     fun createDemoFood()
+
+    fun upDateFoodModel(updatedFoodModel: FoodModel)
 }
