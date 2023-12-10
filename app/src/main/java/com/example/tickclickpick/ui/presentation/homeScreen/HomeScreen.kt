@@ -44,7 +44,6 @@ import com.example.tickclickpick.ui.common.TitleBar
 import com.example.tickclickpick.ui.theme.AppTheme
 import com.example.tickclickpick.viewmodel.HomeViewModel
 import com.example.tickclickpick.viewmodel.HomeViewModelMock
-import com.example.tickclickpick.viewmodel.IHomeViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -88,7 +87,12 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                     Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                    FoodItemList(viewModel = viewModel)
+                    Box(
+                        modifier = Modifier.padding(bottom = 100.dp)
+                    ) {
+                        FoodItemList(viewModel = viewModel)
+                    }
+
                 }
 
                 GradientButton(
