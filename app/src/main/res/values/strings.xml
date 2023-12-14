@@ -6,4 +6,5 @@
     <string name="desc_help_decide_meal">This randomizer can help you to decide \nyour meal from your food list !</string>
     <string name="btn_next">Next</string>
     <string name="btn_pick">Pick A Food For Me</string>
+    <string name="btn_add">Add</string>
 </resources>

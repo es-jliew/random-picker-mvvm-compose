@@ -13,21 +13,30 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.rounded.EditNote
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,8 +45,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tickclickpick.R
+import com.example.tickclickpick.constants.ButtonType
 import com.example.tickclickpick.constants.ColorConstants
 import com.example.tickclickpick.repo.FoodRepositoryMock
+import com.example.tickclickpick.ui.common.BackgroundImage
 import com.example.tickclickpick.ui.common.FoodItemList
 import com.example.tickclickpick.ui.common.GradientButton
 import com.example.tickclickpick.ui.common.TitleBar
@@ -65,6 +76,8 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
             color = Color(ColorConstants.BACKGROUND)
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
+                BackgroundImage()
+
                 Column {
                     Spacer(modifier = Modifier.padding(top = 60.dp))
 
@@ -92,16 +105,67 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                     ) {
                         FoodItemList(viewModel = viewModel)
                     }
-
                 }
 
-                GradientButton(
-                    {},
-                    stringResource(id = R.string.btn_pick),
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .padding(start = 24.dp, end = 24.dp, bottom = 32.dp))
+                Column(modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)) {
+                    OutlinedTextField(
+                        value = "Enter Food Name",
+                        onValueChange = {},
+                        leadingIcon = {
+                            Icon(imageVector = Icons.Rounded.EditNote, contentDescription = "",
+                                //tint = Color(ColorConstants.Button.GRADIENT_START),
+                                modifier = Modifier
+                                    .padding(start = 8.dp)
+                                    .graphicsLayer(alpha = 0.99f)
+                                    .drawWithCache {
+                                        val brush = Brush.horizontalGradient(
+                                            listOf(
+                                                Color(ColorConstants.Button.GRADIENT_START),
+                                                Color(ColorConstants.Button.GRADIENT_END)
+                                            )
+                                        )
+                                        onDrawWithContent {
+                                            drawContent()
+                                            drawRect(brush, blendMode = BlendMode.SrcAtop)
+                                        }
+                                    }
+                                )},
+                        shape = RoundedCornerShape(15.dp),
+                        modifier = Modifier
+                            .padding(start = 24.dp, end = 24.dp, bottom = 18.dp)
+                            .fillMaxWidth(),
+                        colors = TextFieldDefaults.colors(
+                            unfocusedTextColor = Color.White.copy(alpha = 0.4f),
+                            focusedContainerColor = Color.White.copy(0.1f),
+                            unfocusedContainerColor = Color.White.copy(0.1f),
+                            //disabledContainerColor = containerColor,
+                        )
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()) {
+
+                        GradientButton(
+                            ButtonType.MAIN,
+                            {},
+                            buttonTextId = R.string.btn_pick,
+                            modifier = Modifier
+                                .width(233.dp)
+                                .weight(0.7f)
+                                .padding(start = 24.dp, end = 24.dp, bottom = 32.dp))
+
+                        GradientButton(
+                            ButtonType.SUB,
+                            {},
+                            buttonTextId = R.string.btn_add,
+                            modifier = Modifier
+                                .width(82.dp)
+                                .weight(0.3f)
+                                .padding(end = 24.dp, bottom = 32.dp))
+                    }
+                }
             }
         }
     }
