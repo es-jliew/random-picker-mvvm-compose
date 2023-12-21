@@ -1,6 +1,5 @@
 package com.example.tickclickpick.ui.common
 
-import android.R.attr.startY
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
