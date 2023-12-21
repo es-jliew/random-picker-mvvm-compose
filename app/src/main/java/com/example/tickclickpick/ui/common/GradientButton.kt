@@ -1,5 +1,6 @@
 package com.example.tickclickpick.ui.common
 
+import android.os.IBinder
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.height

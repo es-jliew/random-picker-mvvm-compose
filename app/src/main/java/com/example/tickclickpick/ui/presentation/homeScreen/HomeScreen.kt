@@ -1,46 +1,24 @@
 package com.example.tickclickpick.ui.presentation.homeScreen
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.rounded.EditNote
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,6 +27,7 @@ import com.example.tickclickpick.constants.ButtonType
 import com.example.tickclickpick.constants.ColorConstants
 import com.example.tickclickpick.repo.FoodRepositoryMock
 import com.example.tickclickpick.ui.common.BackgroundImage
+import com.example.tickclickpick.ui.common.CustomTextField
 import com.example.tickclickpick.ui.common.FoodItemList
 import com.example.tickclickpick.ui.common.GradientButton
 import com.example.tickclickpick.ui.common.TitleBar
@@ -59,7 +38,6 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
-    //var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
     //Prevent onBackPressed to splash screen
     BackHandler { }
 
@@ -100,49 +78,14 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                     Spacer(modifier = Modifier.padding(top = 20.dp))
 
-                    Box(
-                        modifier = Modifier.padding(bottom = 100.dp)
-                    ) {
-                        FoodItemList(viewModel = viewModel)
-                    }
+                    FoodItemList(viewModel = viewModel)
                 }
 
                 Column(modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)) {
-                    OutlinedTextField(
-                        value = "Enter Food Name",
-                        onValueChange = {},
-                        leadingIcon = {
-                            Icon(imageVector = Icons.Rounded.EditNote, contentDescription = "",
-                                //tint = Color(ColorConstants.Button.GRADIENT_START),
-                                modifier = Modifier
-                                    .padding(start = 8.dp)
-                                    .graphicsLayer(alpha = 0.99f)
-                                    .drawWithCache {
-                                        val brush = Brush.horizontalGradient(
-                                            listOf(
-                                                Color(ColorConstants.Button.GRADIENT_START),
-                                                Color(ColorConstants.Button.GRADIENT_END)
-                                            )
-                                        )
-                                        onDrawWithContent {
-                                            drawContent()
-                                            drawRect(brush, blendMode = BlendMode.SrcAtop)
-                                        }
-                                    }
-                                )},
-                        shape = RoundedCornerShape(15.dp),
-                        modifier = Modifier
-                            .padding(start = 24.dp, end = 24.dp, bottom = 18.dp)
-                            .fillMaxWidth(),
-                        colors = TextFieldDefaults.colors(
-                            unfocusedTextColor = Color.White.copy(alpha = 0.4f),
-                            focusedContainerColor = Color.White.copy(0.1f),
-                            unfocusedContainerColor = Color.White.copy(0.1f),
-                            //disabledContainerColor = containerColor,
-                        )
-                    )
+                    CustomTextField()
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()) {
@@ -170,68 +113,6 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
         }
     }
 }
-
-@Composable
-fun BottomNavItems(
-    onItemSelected: (BottomNavItem) -> Unit,
-    selectedTab: BottomNavItem
-) {
-    val navItems = BottomNavItem.entries.toTypedArray()
-
-    Row(
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        navItems.forEach { item ->
-            BottomNavItem(
-                icon = item.icon,
-                text = item.title,
-                isSelected = item == selectedTab,
-                onItemClick = { onItemSelected(item) }
-            )
-        }
-    }
-}
-
-@Composable
-fun BottomNavItem(
-    icon: ImageVector,
-    text: String,
-    isSelected: Boolean,
-    onItemClick: () -> Unit
-) {
-    val shape = CircleShape // Use CircleShape for round icons, or RoundedCornerShape(50) for rounded rectangle icons
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxHeight()
-            .clickable(onClick = onItemClick)
-            .padding(8.dp)
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = if (isSelected) MaterialTheme.colorScheme.primary else Color.White,
-            modifier = Modifier
-                .size(36.dp)
-                .padding(8.dp)
-                .clip(shape)
-                .background(if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent)
-        )
-        Text(
-            text = text,
-            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.White,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-enum class BottomNavItem(val icon: ImageVector, val title: String) {
-    Home(Icons.Default.Home, "Home"),
-    Search(Icons.Default.List, "List")
-}
-
 
 @Preview
 @Composable
