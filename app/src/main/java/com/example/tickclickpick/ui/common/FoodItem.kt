@@ -31,7 +31,7 @@ import com.example.tickclickpick.model.FoodModel
 import com.example.tickclickpick.ui.theme.AppTheme
 
 @Composable
-fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit,  onCheckboxClicked: (FoodModel) -> Unit) {
+fun FoodItem(foodModel: FoodModel, onRemoveClick: (FoodModel) -> Unit,  onCheckboxClicked: (FoodModel) -> Unit) {
     // Create MutableState for isChecked
     var isChecked by remember { mutableStateOf(foodModel.isChecked) }
 
@@ -73,7 +73,7 @@ fun FoodItem(foodModel: FoodModel, onRemoveClick:() -> Unit,  onCheckboxClicked:
             )
 
             IconButton(
-                onClick = onRemoveClick,
+                onClick = { onRemoveClick(foodModel) }
                 //Modifier.weight()
             ) {
                 Icon(

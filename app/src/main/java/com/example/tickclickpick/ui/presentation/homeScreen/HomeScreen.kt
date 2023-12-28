@@ -9,11 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,7 @@ import com.example.tickclickpick.constants.ButtonType
 import com.example.tickclickpick.constants.ColorConstants
 import com.example.tickclickpick.repo.FoodRepositoryMock
 import com.example.tickclickpick.ui.common.BackgroundImage
+import com.example.tickclickpick.ui.common.CustomDialog
 import com.example.tickclickpick.ui.common.CustomTextField
 import com.example.tickclickpick.ui.common.FoodItemList
 import com.example.tickclickpick.ui.common.GradientButton
@@ -38,6 +40,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
+    val openAlertDialog = remember { mutableStateOf(viewModel.getDialogState()) }
+
     //Prevent onBackPressed to splash screen
     BackHandler { }
 
@@ -46,11 +50,8 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
         viewModel.retrieveAllFood()
     }
 
-    Scaffold { padding ->
         Surface(
-            modifier = Modifier
-                .padding(padding)
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             color = Color(ColorConstants.BACKGROUND)
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -61,7 +62,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                     TitleBar()
 
-                    Spacer(modifier = Modifier.padding(top = 18.dp))
+                    //Spacer(modifier = Modifier.padding(top = 18.dp))
 
                     HomeSearchBar()
 
@@ -83,8 +84,9 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                 Column(modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.BottomCenter)) {
-                    CustomTextField()
+                    .align(Alignment.BottomCenter)
+                ) {
+                    CustomTextField(onValueChange = { viewModel.setFoodName(it) })
 
                     Row(
                         modifier = Modifier
@@ -92,7 +94,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                         GradientButton(
                             ButtonType.MAIN,
-                            {},
+                            onButtonClick = { viewModel.pickFood() },
                             buttonTextId = R.string.btn_pick,
                             modifier = Modifier
                                 .width(233.dp)
@@ -101,7 +103,7 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
                         GradientButton(
                             ButtonType.SUB,
-                            {},
+                            onButtonClick = { viewModel.createFood() },
                             buttonTextId = R.string.btn_add,
                             modifier = Modifier
                                 .width(82.dp)
@@ -110,8 +112,16 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
                     }
                 }
             }
+
+            when(openAlertDialog.value.value.showDialog) {
+                true -> {
+                    CustomDialog(onDismissRequest = { viewModel.resetDialogState() }, dialogText = viewModel.getDialogState().value.message)
+                }
+                else -> {
+
+                }
+            }
         }
-    }
 }
 
 @Preview

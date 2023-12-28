@@ -24,7 +24,7 @@ class FoodRepository : IFoodRepository {
     }
 
     override suspend fun updateFood(foodModel: FoodModel) {
-        foodBox.put(foodModel)
+       foodBox.put(foodModel)
     }
 
     override suspend fun createDemoFood() {

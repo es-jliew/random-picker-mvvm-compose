@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,19 +22,17 @@ import com.example.tickclickpick.viewmodel.IHomeViewModel
 
 @Composable
 fun FoodItemList(viewModel: IHomeViewModel) {
-    val foodList by remember { mutableStateOf(viewModel.getFoodList()) }
+    val foodList by remember { viewModel.getFoodList() }
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        modifier = Modifier) {
+        modifier = Modifier.padding(bottom = 180.dp)) {
         if (foodList.isNotEmpty()) {
-            items(foodList) { foodModel ->
+            items(foodList) {it ->
                 FoodItem(
-                    foodModel = foodModel,
-                    onRemoveClick = {},
-                    onCheckboxClicked = { updatedFoodModel ->
-                        viewModel.upDateFoodModel(updatedFoodModel)
-                })
+                    foodModel = it,
+                    onRemoveClick = { viewModel.deleteFood(it) },
+                    onCheckboxClicked = { viewModel.updateFoodModel(it) })
             }
         } else {
             item{ ShowNoFood() }
