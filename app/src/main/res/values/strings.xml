@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">Tick Click Pick</string>
-    <string name="title_your_meal_list">Food List</string>
-    <string name="title_pick_food">Pick Your \nFavourite Food</string>
-    <string name="title_cannot_decide_meal">Cannot Decide Your \nMeal Today ?</string>
-    <string name="desc_help_decide_meal">This randomizer can help you to decide \nyour meal from your food list !</string>
+    <string name="app_name">ES Random Picker</string>
+    <string name="title_your_meal_list">Item List</string>
+    <string name="title_pick_food">Pick An Item \nFrom Your List</string>
+    <string name="title_cannot_decide_meal">Cannot Make Up \nYour Mind ?</string>
+    <string name="desc_help_decide_meal">This random picker can help you to pick \nyour item from your list !</string>
     <string name="btn_next">Next</string>
-    <string name="btn_pick">Pick A Food For Me</string>
+    <string name="btn_pick">Pick An Item For Me</string>
     <string name="btn_add">Add</string>
+    <string name="btn_ok">OK</string>
+    <string name="today_pick">Item Picked</string>
 </resources>
