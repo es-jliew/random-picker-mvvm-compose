@@ -1,5 +1,5 @@
 # Random-Picker-MVVM-Compose
-A self taught personal project to create a simple random picker Android application with CRUD functions that can persists recipes to local database with best practices such as MVVM, Jetpack Compose and Dependency Injection.
+A self taught personal project to create a simple random picker Android application with CRUD functions that can persists data to local database with best practices such as MVVM, Jetpack Compose and Dependency Injection.
 
 # Libraries
 1. <a href="https://github.com/objectbox/objectbox-java"><strong>ObjectBox</strong></a> : To persist data in local NoSQL database.
