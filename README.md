@@ -6,3 +6,6 @@ A self taught personal project to create a simple random picker Android applicat
 2. <a href="https://github.com/InsertKoinIO/koin"><strong>Koin</strong></a> : To handle dependancy injection.
 
 # Screenshots
+
+# Resources
+- App Icon - [https://www.svgrepo.com/svg/466200/shuffle-circle]
