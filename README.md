@@ -2,7 +2,7 @@
 <p>
   <img src="assets/random_picker_banner_image.jpg">
 </p>
-A self taught personal project to create a simple random picker Android application with CRUD functions that can persists data to local database with best practices such as MVVM, Jetpack Compose and Dependency Injection.
+A personal project to create a simple random picker Android application with CRUD functions that can persists data to local database with best practices such as MVVM, Jetpack Compose and Dependency Injection.
 
 # Libraries
 1. <a href="https://github.com/objectbox/objectbox-java"><strong>ObjectBox</strong></a> : To persist data in local NoSQL database.
