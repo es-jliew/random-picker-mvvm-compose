@@ -1,4 +1,7 @@
 # Random-Picker-MVVM-Compose
+<p>
+  <img src="assets/make_decision.jpg">
+</p>
 A self taught personal project to create a simple random picker Android application with CRUD functions that can persists data to local database with best practices such as MVVM, Jetpack Compose and Dependency Injection.
 
 # Libraries
