@@ -12,3 +12,4 @@ A self taught personal project to create a simple random picker Android applicat
 
 # Resources
 - App Icon - [https://www.svgrepo.com/svg/466200/shuffle-circle]
+- Banner Image - <a href="https://es.vecteezy.com/vectores-gratis/alternativas">Alternative Vectors by Vecteezy</a>
