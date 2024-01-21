@@ -23,3 +23,4 @@ A personal project to create a simple random picker Android application with CRU
 # Resources
 - App Icon - [https://www.svgrepo.com/svg/466200/shuffle-circle]
 - Banner Image - <a href="https://es.vecteezy.com/vectores-gratis/alternativas">Alternative Vectors by Vecteezy</a>
+- UI - [https://uifreebies.net/figma/food-ninja-delivery-app-ui-kit-free]
