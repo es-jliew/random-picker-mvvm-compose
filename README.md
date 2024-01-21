@@ -10,17 +10,17 @@ A self taught personal project to create a simple random picker Android applicat
 
 # Screenshots
 <p>
-  <img src="assets/screenshot_1.png">
+  <img src="assets/screenshot_1.png" width="20%" height="20%">
   &nbsp; &nbsp;
-  <img src="assets/screenshot_2.png"> 
+  <img src="assets/screenshot_2.png" width="20%" height="20%"> 
   &nbsp; &nbsp;
-  <img src="assets/screenshot_3.png"> 
+  <img src="assets/screenshot_3.png"  width="20%" height="20%"> 
   &nbsp; &nbsp;
-  <img src="assets/screenshot_4.png"> 
+  <img src="assets/screenshot_4.png" width="20%" height="20%"> 
   &nbsp; &nbsp;
-  <img src="assets/screenshot_5.png"> 
+  <img src="assets/screenshot_5.png" width="20%" height="20%"> 
   &nbsp; &nbsp;
-  <img src="assets/screenshot_6.png"> 
+  <img src="assets/screenshot_6.png" width="20%" height="20%"> 
   &nbsp; &nbsp;
 </p>
 
