@@ -21,10 +21,10 @@ Random picker allows users to create a list of items and randomly picks one from
 </p>
 
 # Architecture
-1. <a href="https://developer.android.com/topic/architecture">MVVM</a> with <a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState">Mutable State</a>
-2. <a href="https://developer.android.com/jetpack/compose">Jetpack Compose</a> : To design UI.
-3. <a href="https://github.com/InsertKoinIO/koin">Koin</a> : To handle dependency injection.
-4. <a href="https://github.com/objectbox/objectbox-java">ObjectBox</a> : To persist data in local NoSQL database.
+- <a href="https://developer.android.com/topic/architecture">MVVM</a> with <a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/MutableState">Mutable State</a>
+- <a href="https://developer.android.com/jetpack/compose">Jetpack Compose</a> : To design UI.
+- <a href="https://github.com/InsertKoinIO/koin">Koin</a> : To handle dependency injection.
+- <a href="https://github.com/objectbox/objectbox-java">ObjectBox</a> : To persist data in local NoSQL database.
 
 # Resources
 - <a href="https://www.svgrepo.com/svg/466200/shuffle-circle">App Icon</a>
